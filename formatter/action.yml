@@ -1,16 +1,16 @@
 name: "Filename Formatter"
-description: "Format filenames into the acceptable format by TheAlgorithms opganization"
+description: "Format filenames into the acceptable format by TheAlgorithms organization"
 author: "TheAlgorithms"
 inputs:
   filetypes:
-    description: Filter files by specified file types (comma separated values in a string.) Maximum two values. E.g. `.cpp,.hpp`
+    description: Filter files by specified file types (comma-separated values in a string.) Maximum two values. E.g. `.cpp,.hpp`
     required: true
   working-directory:
     description: Working/base directory of the formatter
     required: false
     default: .
   ignore-files:
-    description: Files/folders to ignored
+    description: Files/folders to be ignored
     required: false
 runs:
   using: composite
@@ -21,11 +21,11 @@ runs:
       shell: bash
       run: |
         git config --global user.name github-actions[bot]
-        git config --global user.email 'github-actions@users.noreply.github.com'
+        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
     - name: Running the formatter
       shell: bash
       run: |
-        ./filename_formatter.sh ${{ inputs.working-directory }} ${{ inputs.filetypes }} ${{ inputs.ignore-files }}
+        ${{ github.action_path }}/filename_formatter.sh ${{ inputs.working-directory }} ${{ inputs.filetypes }} ${{ inputs.ignore-files }}
     - name: Committing changes
       shell: bash
       run: |
